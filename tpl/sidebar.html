@@ -27,22 +27,16 @@
             </form>
             <!-- END RESPONSIVE QUICK SEARCH FORM -->
         </li>
-        <li class="start nav-item">
-            <a href="#/chanjet.html">
-                <i class="icon-home"></i>
-                <span class="title">畅捷清结算系统</span>
-            </a>
-        </li>
-        <li class="start nav-item">
-            <a href="#/dataTrans.html">
-                <i class="icon-home"></i>
-                <span class="title">数据传输</span>
-            </a>
-        </li>
-        <li class="start nav-item">
+        <li class="start nav-item" ng-class="{active:'formSub'==current}">
             <a href="#/formSub.html">
                 <i class="icon-home"></i>
                 <span class="title">表单提交</span>
+            </a>
+        </li>
+        <li class="start nav-item" ng-class="{active:'chanjet'==current}">
+            <a href="#/chanjet.html">
+                <i class="icon-home"></i>
+                <span class="title">畅捷清结算系统</span>
             </a>
         </li>
     </ul>

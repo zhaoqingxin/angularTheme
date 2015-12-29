@@ -1,135 +1,226 @@
-<div class="page-bar">
-    <ul class="page-breadcrumb">
-        <li>
-            <a href="#/dashboard.html">chanjet</a>
-            <i class="fa fa-circle"></i>
-        </li>
-        <li>
-            <a href="#">清结算系统</a>
-        </li>
-    </ul>
-</div>
-
-<h3 class="page-title"> 表单提交 </h3>
-
-<div>
-    <div class="note note-info">
-        <h3>表单</h3>
-        <p>
-            此页面实验表单提交功能
-        </p>
-    </div>
-</div>
-
-<div class="portlet-body form" data-ng-controller="formSubController">
-    <form class="form-horizontal" novalidate role="form" name="userform">
-        <div class="form-body">
-            <div class="form-group">
-                <label class="col-md-3 control-label">用户名</label>
-                <div class="col-md-6"  ng-class="{'has-error':userform.name.$invalid&&userform.name.$dirty}">
-                    <input type="text" class="form-control" placeholder="Enter text" ng-model="form.name" ng-pattern="validateRegExp.tel" name="name" required>
-                    <span class="help-block" ng-show="userform.name.$invalid&&userform.name.$dirty">请输入用户名，用户名由英文字母汉子组成</span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-3 control-label">简介</label>
-                <div class="col-md-6">
-                    <input type="text" class="form-control input-inline input-medium" placeholder="Enter text" ng-model="form.introduction">
-                    <span class="help-block"> 请输入简介. </span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-3 control-label">邮件地址</label>
-                <div class="col-md-6">
-                    <div class="input-inline input-medium">
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fa fa-user"></i>
-                            </span>
-                            <input type="email" class="form-control" placeholder="Email Address" ng-model="form.mail1"> </div>
-                    </div>
-                    <span class="help-inline"> 请输入邮件地址. </span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-3 control-label">邮件地址</label>
-                <div class="col-md-6">
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="fa fa-envelope"></i>
-                        </span>
-                        <input type="email" class="form-control" placeholder="Email Address" ng-model="form.mail2"> </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-3 control-label">密码</label>
-                <div class="col-md-6">
-                    <div class="input-group">
-                        <input type="password" class="form-control" placeholder="Password" ng-model="form.password">
-                        <span class="input-group-addon">
-                            <i class="fa fa-user"></i>
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-3 control-label">不可编辑</label>
-                <div class="col-md-6">
-                    <input type="password" class="form-control" placeholder="Disabled" disabled> </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-3 control-label">只读模式</label>
-                <div class="col-md-6">
-                    <input type="password" class="form-control" placeholder="Readonly" readonly> </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-3 control-label">下拉菜单</label>
-                <div class="col-md-6">
-                    <select class="form-control" ng-model="form.option">
-                        <option>Option 1</option>
-                        <option value="Option 2">Option 2</option>
-                        <option value="Option 3">Option 3</option>
-                        <option value="Option 4">Option 4</option>
-                        <option value="Option 5">Option 5</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-3 control-label">行内选择框</label>
-                <div class="col-md-6">
-                    <div class="checkbox-list">
-                        <label class="checkbox-inline">
-                            <input type="checkbox" id="inlineCheckbox21" value="option1"> Checkbox 1 </label>
-                        <label class="checkbox-inline">
-                            <input type="checkbox" id="inlineCheckbox22" value="option2"> Checkbox 2 </label>
-                        <label class="checkbox-inline">
-                            <input type="checkbox" id="inlineCheckbox23" value="option3" disabled> Disabled </label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-3 control-label">行内单选</label>
-                <div class="col-md-6">
-                    <div class="radio-list">
-                        <label class="radio-inline">
-                            <input type="radio" name="optionsRadios" id="optionsRadios25" value="option1" checked> Option 1 </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="optionsRadios" id="optionsRadios26" value="option2" checked> Option 2 </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="optionsRadios" id="optionsRadios27" value="option3" disabled> Disabled </label>
-                    </div>
-                </div>
+<div class="container" ng-controller="formSubController">
+    <form name="fundAccountForm" class="form-horizontal" action="/submit" method="post" enctype="multipart/form-data">
+        <div class="form-group has-feedback input-text {{(fundAccountForm.userNumber.$valid&&fundAccountForm.userNumber.$dirty)&&'has-success'}} {{(fundAccountForm.userNumber.$invalid&&fundAccountForm.userNumber.$dirty)&&'has-error'}}">
+            <label class="col-md-2 control-label " for="userNumber">商户号</label>
+            <div class="col-md-10">
+                <input type="text"  class="form-control" name="userNumber" id="userNumber" ng-model="user.userNumber" placeholder="user number" ng-pattern="validateRegExp.intege" ng-maxlength="32" required/>
+                <span ng-show="fundAccountForm.userNumber.$valid&&fundAccountForm.userNumber.$dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                <span class="help-block" ng-show="fundAccountForm.userNumber.$invalid&&fundAccountForm.userNumber.$dirty"></span>
             </div>
         </div>
-        <div class="form-actions">
-            <div class="row">
-                <div class="col-md-offset-3 col-md-9">
-                    <button type="submit" ng-readonly="userform.name.$error.pattern||userform.name.$error.required" class="btn green" ng-click="sub()" ng-disabled="userform.$invalid">提交</button>
-                    <button type="button" class="btn default">删除</button>
-                </div>
+        <div class="form-group has-feedback input-text {{(fundAccountForm.InvName.$valid&&fundAccountForm.InvName.$dirty)&&'has-success'}} {{(fundAccountForm.InvName.$invalid&&fundAccountForm.InvName.$dirty)&&'has-error'}}">
+            <label class="col-md-2 control-label " for="InvName">投资者名称</label>
+            <div class="col-md-10">
+                <input type="text"  class="form-control" name="InvName" id="InvName" ng-model="user.InvName" placeholder="user InvName" ng-pattern="" ng-maxlength="120" required/>
+                <span ng-show="fundAccountForm.InvName.$valid&&fundAccountForm.InvName.$dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                <span class="help-block" ng-show="fundAccountForm.InvName.$invalid&&fundAccountForm.InvName.$dirty"></span>
+            </div>
+        </div>
+        <div class="form-group has-feedback input-text {{(fundAccountForm.idNo.$valid&&fundAccountForm.idNo.$dirty)&&'has-success'}} {{(fundAccountForm.idNo.$invalid&&fundAccountForm.idNo.$dirty)&&'has-error'}}">
+            <label class="col-md-2 control-label " for="idNo">机构证件号码</label>
+            <div class="col-md-10">
+                <input type="text"  class="form-control" name="idNo" id="idNo" ng-model="user.idNo" placeholder="user idNo" ng-pattern="" ng-maxlength="32" required/>
+                <span ng-show="fundAccountForm.idNo.$valid&&fundAccountForm.idNo.$dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                <span class="help-block" ng-show="fundAccountForm.idNo.$invalid&&fundAccountForm.idNo.$dirty"></span>
+            </div>
+        </div>
+        <div class="form-group has-feedback input-text {{(fundAccountForm.idExpiredt.$valid&&fundAccountForm.idExpiredt.$dirty)&&'has-success'}} {{(fundAccountForm.idExpiredt.$invalid&&fundAccountForm.idExpiredt.$dirty)&&'has-error'}}">
+            <label class="col-md-2 control-label " for="idExpiredt">机构证件有效期</label>
+            <div class="col-md-10">
+                <input type="text"  class="form-control" name="idExpiredt" id="idExpiredt" ng-model="user.idExpiredt" placeholder="user idExpiredt" ng-pattern="" ng-maxlength="8" required/>
+                <span ng-show="fundAccountForm.idExpiredt.$valid&&fundAccountForm.idExpiredt.$dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                <span class="help-block" ng-show="fundAccountForm.idExpiredt.$invalid&&fundAccountForm.idExpiredt.$dirty"></span>
+            </div>
+        </div>
+        <div class="form-group has-feedback input-text {{(fundAccountForm.bankNo.$valid&&fundAccountForm.bankNo.$dirty)&&'has-success'}} {{(fundAccountForm.bankNo.$invalid&&fundAccountForm.bankNo.$dirty)&&'has-error'}}">
+            <label class="col-md-2 control-label " for="bankNo">银行编码</label>
+            <div class="col-md-10">
+                <input type="text"  class="form-control" name="bankNo" id="bankNo" ng-model="user.bankNo" placeholder="user bankNo" ng-pattern="" ng-maxlength="4" required/>
+                <span ng-show="fundAccountForm.bankNo.$valid&&fundAccountForm.bankNo.$dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                <span class="help-block" ng-show="fundAccountForm.bankNo.$invalid&&fundAccountForm.bankNo.$dirty"></span>
+            </div>
+        </div>
+        <div class="form-group has-feedback input-text {{(fundAccountForm.bankName.$valid&&fundAccountForm.bankName.$dirty)&&'has-success'}} {{(fundAccountForm.bankName.$invalid&&fundAccountForm.bankName.$dirty)&&'has-error'}}">
+            <label class="col-md-2 control-label " for="bankName">银行全称</label>
+            <div class="col-md-10">
+                <input type="text"  class="form-control" name="bankName" id="bankName" ng-model="user.bankName" placeholder="user bankName" ng-pattern="" ng-maxlength="120" required/>
+                <span ng-show="fundAccountForm.bankName.$valid&&fundAccountForm.bankName.$dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                <span class="help-block" ng-show="fundAccountForm.bankName.$invalid&&fundAccountForm.bankName.$dirty"></span>
+            </div>
+        </div>
+        <div class="form-group has-feedback input-text {{(fundAccountForm.acctNm.$valid&&fundAccountForm.acctNm.$dirty)&&'has-success'}} {{(fundAccountForm.acctNm.$invalid&&fundAccountForm.acctNm.$dirty)&&'has-error'}}">
+            <label class="col-md-2 control-label " for="acctNm">银行账户名</label>
+            <div class="col-md-10">
+                <input type="text"  class="form-control" name="acctNm" id="acctNm" ng-model="user.acctNm" placeholder="user acctNm" ng-pattern="" ng-maxlength="120" required/>
+                <span ng-show="fundAccountForm.acctNm.$valid&&fundAccountForm.acctNm.$dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                <span class="help-block" ng-show="fundAccountForm.acctNm.$invalid&&fundAccountForm.acctNm.$dirty"></span>
+            </div>
+        </div>
+        <div class="form-group has-feedback input-text {{(fundAccountForm.settlAcct.$valid&&fundAccountForm.settlAcct.$dirty)&&'has-success'}} {{(fundAccountForm.settlAcct.$invalid&&fundAccountForm.settlAcct.$dirty)&&'has-error'}}">
+            <label class="col-md-2 control-label " for="settlAcct">银行账号</label>
+            <div class="col-md-10">
+                <input type="text"  class="form-control" name="settlAcct" id="settlAcct" ng-model="user.settlAcct" placeholder="user settlAcct" ng-pattern="" ng-maxlength="32" required/>
+                <span ng-show="fundAccountForm.settlAcct.$valid&&fundAccountForm.settlAcct.$dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                <span class="help-block" ng-show="fundAccountForm.settlAcct.$invalid&&fundAccountForm.settlAcct.$dirty"></span>
+            </div>
+        </div>
+        <div class="form-group has-feedback input-text {{(fundAccountForm.curType.$valid&&fundAccountForm.curType.$dirty)&&'has-success'}} {{(fundAccountForm.curType.$invalid&&fundAccountForm.curType.$dirty)&&'has-error'}}">
+            <label class="col-md-2 control-label " for="curType">银行币种</label>
+            <div class="col-md-10">
+                <input type="text"  class="form-control" name="curType" id="curType" ng-model="user.curType" placeholder="user curType" ng-pattern="" ng-maxlength="3" required/>
+                <span ng-show="fundAccountForm.curType.$valid&&fundAccountForm.curType.$dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                <span class="help-block" ng-show="fundAccountForm.curType.$invalid&&fundAccountForm.curType.$dirty"></span>
+            </div>
+        </div>
+        <div class="form-group has-feedback input-text {{(fundAccountForm.orgCode.$valid&&fundAccountForm.orgCode.$dirty)&&'has-success'}} {{(fundAccountForm.orgCode.$invalid&&fundAccountForm.orgCode.$dirty)&&'has-error'}}">
+            <label class="col-md-2 control-label " for="orgCode">组织机构代码证</label>
+            <div class="col-md-10">
+                <input type="text"  class="form-control" name="orgCode" id="orgCode" ng-model="user.orgCode" placeholder="user orgCode" ng-pattern="" ng-maxlength="30" required/>
+                <span ng-show="fundAccountForm.orgCode.$valid&&fundAccountForm.orgCode.$dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                <span class="help-block" ng-show="fundAccountForm.orgCode.$invalid&&fundAccountForm.orgCode.$dirty"></span>
+            </div>
+        </div>
+        <div class="form-group has-feedback input-text {{(fundAccountForm.taxregCode.$valid&&fundAccountForm.taxregCode.$dirty)&&'has-success'}} {{(fundAccountForm.taxregCode.$invalid&&fundAccountForm.taxregCode.$dirty)&&'has-error'}}">
+            <label class="col-md-2 control-label " for="taxregCode">机构税务登记证</label>
+            <div class="col-md-10">
+                <input type="text"  class="form-control" name="taxregCode" id="taxregCode" ng-model="user.taxregCode" placeholder="user orgCode" ng-pattern="" ng-maxlength="60" required/>
+                <span ng-show="fundAccountForm.taxregCode.$valid&&fundAccountForm.taxregCode.$dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                <span class="help-block" ng-show="fundAccountForm.taxregCode.$invalid&&fundAccountForm.taxregCode.$dirty"></span>
+            </div>
+        </div>
+        <div class="form-group has-feedback input-text {{(fundAccountForm.reprName.$valid&&fundAccountForm.reprName.$dirty)&&'has-success'}} {{(fundAccountForm.reprName.$invalid&&fundAccountForm.reprName.$dirty)&&'has-error'}}">
+            <label class="col-md-2 control-label " for="reprName">法定代表人</label>
+            <div class="col-md-10">
+                <input type="text"  class="form-control" name="reprName" id="reprName" ng-model="user.reprName" placeholder="user reprName" ng-pattern="" ng-maxlength="120" required/>
+                <span ng-show="fundAccountForm.reprName.$valid&&fundAccountForm.reprName.$dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                <span class="help-block" ng-show="fundAccountForm.reprName.$invalid&&fundAccountForm.reprName.$dirty"></span>
+            </div>
+        </div>
+        <div class="form-group has-feedback input-text {{(fundAccountForm.reprIdtp.$valid&&fundAccountForm.reprIdtp.$dirty)&&'has-success'}} {{(fundAccountForm.reprIdtp.$invalid&&fundAccountForm.reprIdtp.$dirty)&&'has-error'}}">
+            <label class="col-md-2 control-label " for="reprIdtp">法人证件类型</label>
+            <div class="col-md-10">
+                <input type="text"  class="form-control" name="reprIdtp" id="reprIdtp" ng-model="user.reprIdtp" placeholder="user reprIdtp" ng-pattern="" ng-maxlength="2" required/>
+                <span ng-show="fundAccountForm.reprIdtp.$valid&&fundAccountForm.reprIdtp.$dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                <span class="help-block" ng-show="fundAccountForm.reprIdtp.$invalid&&fundAccountForm.reprIdtp.$dirty"></span>
+            </div>
+        </div>
+        <div class="form-group has-feedback input-text {{(fundAccountForm.reprIdno.$valid&&fundAccountForm.reprIdno.$dirty)&&'has-success'}} {{(fundAccountForm.reprIdno.$invalid&&fundAccountForm.reprIdno.$dirty)&&'has-error'}}">
+            <label class="col-md-2 control-label " for="reprIdno">法人证件号码</label>
+            <div class="col-md-10">
+                <input type="text"  class="form-control" name="reprIdno" id="reprIdno" ng-model="user.reprIdno" placeholder="user reprIdno" ng-pattern="" ng-maxlength="32" required/>
+                <span ng-show="fundAccountForm.reprIdno.$valid&&fundAccountForm.reprIdno.$dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                <span class="help-block" ng-show="fundAccountForm.reprIdno.$invalid&&fundAccountForm.reprIdno.$dirty"></span>
+            </div>
+        </div>
+        <div class="form-group has-feedback input-text {{(fundAccountForm.reprIdExpiredt.$valid&&fundAccountForm.reprIdExpiredt.$dirty)&&'has-success'}} {{(fundAccountForm.reprIdExpiredt.$invalid&&fundAccountForm.reprIdExpiredt.$dirty)&&'has-error'}}">
+            <label class="col-md-2 control-label " for="reprIdExpiredt">法人证件有效期</label>
+            <div class="col-md-10">
+                <input type="text"  class="form-control" name="reprIdExpiredt" id="reprIdExpiredt" ng-model="user.reprIdExpiredt" placeholder="user reprIdExpiredt" ng-pattern="" ng-maxlength="8" required/>
+                <span ng-show="fundAccountForm.reprIdExpiredt.$valid&&fundAccountForm.reprIdExpiredt.$dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                <span class="help-block" ng-show="fundAccountForm.reprIdExpiredt.$invalid&&fundAccountForm.reprIdExpiredt.$dirty"></span>
+            </div>
+        </div>
+        <div class="form-group has-feedback input-text {{(fundAccountForm.broker.$valid&&fundAccountForm.broker.$dirty)&&'has-success'}} {{(fundAccountForm.broker.$invalid&&fundAccountForm.broker.$dirty)&&'has-error'}}">
+            <label class="col-md-2 control-label " for="broker">经办人1</label>
+            <div class="col-md-10">
+                <input type="text"  class="form-control" name="broker" id="broker" ng-model="user.broker" placeholder="user broker" ng-pattern="" ng-maxlength="32" required/>
+                <span ng-show="fundAccountForm.broker.$valid&&fundAccountForm.broker.$dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                <span class="help-block" ng-show="fundAccountForm.broker.$invalid&&fundAccountForm.broker.$dirty"></span>
+            </div>
+        </div>
+        <div class="form-group has-feedback input-text {{(fundAccountForm.bkIdtp.$valid&&fundAccountForm.bkIdtp.$dirty)&&'has-success'}} {{(fundAccountForm.bkIdtp.$invalid&&fundAccountForm.bkIdtp.$dirty)&&'has-error'}}">
+            <label class="col-md-2 control-label " for="bkIdtp">经办人1证件类型</label>
+            <div class="col-md-10">
+                <input type="text"  class="form-control" name="bkIdtp" id="bkIdtp" ng-model="user.bkIdtp" placeholder="user bkIdtp" ng-pattern="" ng-maxlength="32" required/>
+                <span ng-show="fundAccountForm.bkIdtp.$valid&&fundAccountForm.bkIdtp.$dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                <span class="help-block" ng-show="fundAccountForm.bkIdtp.$invalid&&fundAccountForm.bkIdtp.$dirty"></span>
+            </div>
+        </div>
+        <div class="form-group has-feedback input-text {{(fundAccountForm.bkIdno.$valid&&fundAccountForm.bkIdno.$dirty)&&'has-success'}} {{(fundAccountForm.bkIdno.$invalid&&fundAccountForm.bkIdno.$dirty)&&'has-error'}}">
+            <label class="col-md-2 control-label " for="bkIdno">经办人1证件号码</label>
+            <div class="col-md-10">
+                <input type="text"  class="form-control" name="bkIdno" id="bkIdno" ng-model="user.bkIdno" placeholder="user bkIdno" ng-pattern="" ng-maxlength="32" required/>
+                <span ng-show="fundAccountForm.bkIdno.$valid&&fundAccountForm.bkIdno.$dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                <span class="help-block" ng-show="fundAccountForm.bkIdno.$invalid&&fundAccountForm.bkIdno.$dirty"></span>
+            </div>
+        </div>
+        <div class="form-group has-feedback input-text {{(fundAccountForm.bkIdExpiredt.$valid&&fundAccountForm.bkIdExpiredt.$dirty)&&'has-success'}} {{(fundAccountForm.bkIdExpiredt.$invalid&&fundAccountForm.bkIdExpiredt.$dirty)&&'has-error'}}">
+            <label class="col-md-2 control-label " for="bkIdExpiredt">经办人1证件有效期</label>
+            <div class="col-md-10">
+                <input type="text"  class="form-control" name="bkIdExpiredt" id="bkIdExpiredt" ng-model="user.bkIdExpiredt" placeholder="user bkIdExpiredt" ng-pattern="" ng-maxlength="8" required/>
+                <span ng-show="fundAccountForm.bkIdExpiredt.$valid&&fundAccountForm.bkIdExpiredt.$dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                <span class="help-block" ng-show="fundAccountForm.bkIdExpiredt.$invalid&&fundAccountForm.bkIdExpiredt.$dirty"></span>
+            </div>
+        </div>
+        <div class="form-group has-feedback input-text {{(fundAccountForm.bkMobile.$valid&&fundAccountForm.bkMobile.$dirty)&&'has-success'}} {{(fundAccountForm.bkMobile.$invalid&&fundAccountForm.bkMobile.$dirty)&&'has-error'}}">
+            <label class="col-md-2 control-label " for="bkMobile">经办人1手机号码</label>
+            <div class="col-md-10">
+                <input type="text"  class="form-control" name="bkMobile" id="bkMobile" ng-model="user.bkMobile" placeholder="user bkMobile" ng-pattern="" ng-maxlength="24" required/>
+                <span ng-show="fundAccountForm.bkMobile.$valid&&fundAccountForm.bkMobile.$dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                <span class="help-block" ng-show="fundAccountForm.bkMobile.$invalid&&fundAccountForm.bkMobile.$dirty"></span>
+            </div>
+        </div>
+        <div class="form-group has-feedback input-text {{(fundAccountForm.bkEmail.$valid&&fundAccountForm.bkEmail.$dirty)&&'has-success'}} {{(fundAccountForm.bkEmail.$invalid&&fundAccountForm.bkEmail.$dirty)&&'has-error'}}">
+            <label class="col-md-2 control-label " for="bkEmail">经办人1 EMAIL邮箱</label>
+            <div class="col-md-10">
+                <input type="text"  class="form-control" name="bkEmail" id="bkEmail" ng-model="user.bkEmail" placeholder="user bkEmail" ng-pattern="" ng-maxlength="40" required/>
+                <span ng-show="fundAccountForm.bkEmail.$valid&&fundAccountForm.bkEmail.$dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                <span class="help-block" ng-show="fundAccountForm.bkEmail.$invalid&&fundAccountForm.bkEmail.$dirty"></span>
+            </div>
+        </div>
+        <!--<div class="form-group has-feedback input-text {{(fundAccountForm.licenseFilePath.$valid&&fundAccountForm.licenseFilePath.$dirty)&&'has-success'}} {{(fundAccountForm.userNumber.$invalid&&fundAccountForm.userNumber.$dirty)&&'has-error'}}">
+            <label class="col-md-2 control-label " for="licenseFilePath">资质文件保存路径</label>
+            <div class="col-md-10">
+                <input type="text"  class="form-control" name="licenseFilePath" id="licenseFilePath" ng-model="user.licenseFilePath" placeholder="user licenseFilePath" ng-pattern="" ng-maxlength="200" required/>
+                <span ng-show="fundAccountForm.licenseFilePath.$valid&&fundAccountForm.licenseFilePath.$dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                <span class="help-block" ng-show="fundAccountForm.licenseFilePath.$invalid&&fundAccountForm.licenseFilePath.$dirty"></span>
+            </div>
+        </div>-->
+        <div class="form-group has-feedback input-text">
+            <label class="col-md-2 control-label " for="bizLicenseFile">企业有效营业执照(或民政部门注册登记证书)</label>
+            <div class="col-md-10">
+                <input type="file"  class="form-control" name="bizLicenseFile" id="bizLicenseFile" required/>
+            </div>
+        </div>
+        <div class="form-group has-feedback input-text">
+            <label class="col-md-2 control-label " for="orgCodeFile">企业组织机构代码证</label>
+            <div class="col-md-10">
+                <input type="file"  class="form-control" name="orgCodeFile" id="orgCodeFile" required/>
+            </div>
+        </div>
+        <div class="form-group has-feedback input-text">
+            <label class="col-md-2 control-label " for="taxRegistFile">企业税务登记证</label>
+            <div class="col-md-10">
+                <input type="file"  class="form-control" name="taxRegistFile" id="taxRegistFile" required/>
+            </div>
+        </div>
+        <div class="form-group has-feedback input-text">
+            <label class="col-md-2 control-label " for="representIdFile">法定代表人身份证件</label>
+            <div class="col-md-10">
+                <input type="file"  class="form-control" name="representIdFile" id="representIdFile" required/>
+            </div>
+        </div>
+        <div class="form-group has-feedback input-text">
+            <label class="col-md-2 control-label " for="bankAcctAckFile">银行开户确认文件</label>
+            <div class="col-md-10">
+                <input type="file"  class="form-control" name="bankAcctAckFile" id="bankAcctAckFile" required/>
+            </div>
+        </div>
+        <div class="form-group has-feedback input-text">
+            <label class="col-md-2 control-label " for="brokerIdFile">经办人身份证件</label>
+            <div class="col-md-10">
+                <input type="file"  class="form-control" name="brokerIdFile" id="brokerIdFile" required/>
+            </div>
+        </div>
+        <div class="form-group has-feedback input-text">
+            <label class="col-md-2 control-label " for="handlerFlag">业务授权</label>
+            <div class="col-md-10">
+                <input type="file"  class="form-control" name="handlerFlag" id="handlerFlag" required/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-md-10">
+                <button type="submit" class="btn btn-default">提交</button>
             </div>
         </div>
     </form>

@@ -1,103 +1,98 @@
-/***
-Metronic AngularJS App Main Script
-***/
 
 /* Metronic App */
 var MetronicApp = angular.module("MetronicApp", [
     "ui.router",
     "oc.lazyLoad"
-]); 
+]);
 
-/* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
-MetronicApp.config(['$ocLazyLoadProvider', function($ocLazyLoadProvider) {
-    $ocLazyLoadProvider.config({
-        // global configs go here
-    });
-}]);
-
-/********************************************
- BEGIN: BREAKING CHANGE in AngularJS v1.3.x:
-*********************************************/
-/**
-`$controller` will no longer look for controllers on `window`.
-The old behavior of looking on `window` for controllers was originally intended
-for use in examples, demos, and toy apps. We found that allowing global controller
-functions encouraged poor practices, so we resolved to disable this behavior by
-default.
-
-To migrate, register your controllers with modules rather than exposing them
-as globals:
-
-Before:
-
-```javascript
-function MyController() {
-  // ...
-}
-```
-
-After:
-
-```javascript
-angular.module('myApp', []).controller('MyController', [function() {
-  // ...
-}]);
-
-Although it's not recommended, you can re-enable the old behavior like this:
-
-```javascript
-angular.module('myModule').config(['$controllerProvider', function($controllerProvider) {
-  // this option might be handy for migrating old apps, but please don't use it
-  // in new ones!
-  $controllerProvider.allowGlobals();
-}]);
-**/
-
-//AngularJS v1.3.x workaround for old style controller declarition in HTML
-MetronicApp.config(['$controllerProvider', function($controllerProvider) {
-  // this option might be handy for migrating old apps, but please don't use it
-  // in new ones!
-  $controllerProvider.allowGlobals();
-}]);
-
-/********************************************
- END: BREAKING CHANGE in AngularJS v1.3.x:
-*********************************************/
-
-
-
+MetronicApp.factory('validateRegExp',function(){
+    return {
+        intege: "^-?[1-9]\\d*$",
+        // 整数
+        intege1: "^[1-9]\\d*$",
+        // 正整数
+        Amount:"^[0-9]+(.[0-9]{1,2})?$",
+        //金额（正整数 或2位小数）
+        decmal6:"^[0-9]+\.[0-9]{1}$",
+        //金额（1位小数）
+        intege2: "^-[1-9]\\d*$",
+        // 负整数
+        num: "^([+-]?)\\d*\\.?\\d+$",
+        // 数字
+        num1: "^[1-9]\\d*|0$",
+        // 正数（正整数 + 0）
+        num2: "^-[1-9]\\d*|0$",
+        // 负数（负整数 + 0）
+        chinese: "^[\\u4e00-\\u9fa5]+$",
+        // 仅中文
+        color: "^[a-fA-F0-9]{6}$",
+        // 颜色
+        date: "^\\d{4}(\\-|\\/|\.)\\d{1,2}\\1\\d{1,2}$",
+        // 日期
+        email: "^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z0-9]+$",
+        // 邮件
+        idcard: "^[1-9]([0-9]{14}|[0-9]{17}|[0-9]{16}[xX]{1})$",
+        // 身份证
+        bankcard:"^[1-9]([0-9]{14,21})$",
+        // 银行卡号
+        ip4: "^(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)$",
+        // ip地址
+        letter: "^[A-Za-z]+$",
+        // 字母
+        letter_l: "^[a-z]+$",
+        // 小写字母
+        letter_u: "^[A-Z]+$",
+        // 大写字母
+        mobile: "^0?(13|15|18|14|17)[0-9]{9}$",
+        // 手机
+        notempty: "^\\S+$",
+        // 非空
+        password: "^.*[A-Za-z0-9\\w_-]+.*$",
+        psd:"((?=.*\d)(?=.*\D)|(?=.*[a-zA-Z])(?=.*[^a-zA-Z]))",//数字字母符号中的两种
+        paypsd: "^\\d{6}$",
+        // 密码
+        fullNumber: "^[0-9]+$",
+        // 数字
+        tel: "^[0-9\-()（）]{7,18}$",
+        // 电话号码的函数(包括验证国内区号,国际区号,分机号)
+        url: "^http[s]?:\\/\\/([\\w-]+\\.)+[\\w-]+([\\w-./?%&=]*)?$",
+        // url
+        username: "^[A-Za-z0-9_\\-\\u4e00-\\u9fa5]+$",
+        // 户名
+        deptname: "^[A-Za-z0-9_()（）\\-\\u4e00-\\u9fa5]+$",
+        // 单位名
+        zipcode: "^\\d{6}$",
+        // 邮编
+        phoneValid:"^\\d{6}$",
+        //短信验证码6位
+        realname: "^[A-Za-z\\u4e00-\\u9fa5]+$",
+        // 真实姓名
+    };
+});
 /* Setup App Main Controller */
 MetronicApp.controller('AppController', ['$scope', '$rootScope', function($scope, $rootScope) {
     $scope.$on('$viewContentLoaded', function() {
-        //App.initComponents(); // init core components
-        //Layout.init(); //  Init entire layout(header, footer, sidebar, etc) on page load if the partials included in server side instead of loading with ng-include directive 
+
     });
 }]);
 
-MetronicApp.controller('dataTransController', ['$scope', '$rootScope', function($scope, $rootScope) {
+/*MetronicApp.controller('formSubController', ['$scope', '$rootScope','validateRegExp', function($scope, $rootScope,validateRegExp) {
     $scope.$on('$viewContentLoaded', function() {
-        // init core components
-        //Layout.init(); //  Init entire layout(header, footer, sidebar, etc) on page load if the partials included in server side instead of loading with ng-include directive
+        console.log(validateRegExp);
     });
-}]);
-
-/***
-Layout Partials.
-By default the partials are loaded through AngularJS ng-include directive. In case they loaded in server side(e.g: PHP include function) then below partial 
-initialization can be disabled and Layout.init() should be called on page load complete as explained above.
-***/
+}]);*/
 
 /* Setup Layout Part - Header */
 MetronicApp.controller('HeaderController', ['$scope', function($scope) {
     $scope.$on('$includeContentLoaded', function() {
-        //Layout.initHeader(); // init header
+
     });
 }]);
 
 /* Setup Layout Part - Sidebar */
 MetronicApp.controller('SidebarController', ['$scope', function($scope) {
     $scope.$on('$includeContentLoaded', function() {
-        //Layout.initSidebar(); // init sidebar
+
     });
 }]);
 
@@ -109,7 +104,9 @@ MetronicApp.controller('FooterController', ['$scope', function($scope) {
         Layout.initFooter(); // init footer
     });
 }]);
-var pathName;
+
+/*config fis3 path*/
+var url={};
 var path={
                 'views/chanjet.html':'views/chanjet.html',
                 'css/page/chanjet.css':'css/page/chanjet.css',
@@ -120,58 +117,33 @@ var path={
                 'js/page/formSub.js':'js/page/formSub.js'
             };
 
-
-
-
-
-
-/*var chanjetCss=__uri('/css/page/chanjet.css');
-var chanjetJs=__uri('/js/page/chanjet.js');
-var chanjetView=__uri('/views/chanjet.html');
-var formSubJs=__uri('/js/page/formSub.js');
-var formSubView=__uri('/views/formSub.html');*/
-
 try
 {
-    pathName=__RESOURCE_MAP__.res;
-    for(var key in pathName){
-        pathName[key]=pathName[key].uri
+    url=__RESOURCE_MAP__.res;
+    for(var key in url){
+        url[key]=url[key].uri
     }
 }
 catch (e)
 {
-    console.log(e);
-    pathName=path;
+    url=path;
 }
 
-console.log(pathName);
+MetronicApp.run(function($rootScope){
+    $rootScope.$on('$stateChangeStart',function(event,toState,toParams,fromState,fromParams){
+        $rootScope.current = toState.name;
+    });
+});
+
 /* Setup Rounting For All Pages */
 MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     // Redirect any unmatched url
-    $urlRouterProvider.otherwise("/chanjet.html");
+    $urlRouterProvider.otherwise("/formSub.html");
     
     $stateProvider
-        .state('chanjet', {
-            url: "/chanjet.html",
-            templateUrl: pathName['views/chanjet.html'],
-            data: {pageTitle: 'chanjet'},
-            resolve: {
-                deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                    return $ocLazyLoad.load([{
-                        name: 'MetronicApp',
-                        insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
-                        files: [
-                            pathName['css/page/chanjet.css'],
-                            pathName['js/page/chanjet.js']
-                        ]
-                   }]);
-                }]
-            }
-        })
-
         .state('formSub', {
             url: "/formSub.html",
-            templateUrl:pathName['views/formSub.html'] ,
+            templateUrl:url['views/formSub.html'] ,
             data: {pageTitle: 'formSub'},
             controller: "formSubController",
             resolve: {
@@ -180,7 +152,24 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                         name: 'MetronicApp',
                         insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
                         files: [
-                            pathName['js/page/formSub.js']
+                            url['js/page/formSub.js']
+                        ]
+                    }]);
+                }]
+            }
+        })
+        .state('chanjet', {
+            url: "/chanjet.html",
+            templateUrl: url['views/chanjet.html'],
+            data: {pageTitle: 'chanjet'},
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load([{
+                        name: 'MetronicApp',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
+                        files: [
+                            url['css/page/chanjet.css'],
+                            url['js/page/chanjet.js']
                         ]
                     }]);
                 }]

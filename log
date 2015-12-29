@@ -1,0 +1,61 @@
+"C:\Program Files (x86)\JetBrains\WebStorm 10.0.1\bin\runnerw.exe" "C:\Program Files\nodejs\node.exe" server1.js
+{ userNumber: 'zhaoqingxin' }
+{ brokerIdFile: 
+   File {
+     domain: null,
+     _events: {},
+     _eventsCount: 0,
+     _maxListeners: undefined,
+     size: 12813,
+     path: 'C:\\Users\\sks\\AppData\\Local\\Temp\\upload_d43854f83ce1edbcb330da2cf263c58b',
+     name: 'CuLogobtn.jpg',
+     type: 'image/jpeg',
+     hash: null,
+     lastModifiedDate: Tue Dec 29 2015 15:26:22 GMT+0800 (中国标准时间),
+     _writeStream: 
+      WriteStream {
+        _writableState: [Object],
+        writable: true,
+        domain: null,
+        _events: {},
+        _eventsCount: 0,
+        _maxListeners: undefined,
+        path: 'C:\\Users\\sks\\AppData\\Local\\Temp\\upload_d43854f83ce1edbcb330da2cf263c58b',
+        fd: null,
+        flags: 'w',
+        mode: 438,
+        start: undefined,
+        pos: undefined,
+        bytesWritten: 12813,
+        closed: true } },
+  handlerFlag: 
+   File {
+     domain: null,
+     _events: {},
+     _eventsCount: 0,
+     _maxListeners: undefined,
+     size: 5731,
+     path: 'C:\\Users\\sks\\AppData\\Local\\Temp\\upload_108266305bf06de03fb81d0ae2c26cec',
+     name: 'Culogo.gif',
+     type: 'image/gif',
+     hash: null,
+     lastModifiedDate: Tue Dec 29 2015 15:26:22 GMT+0800 (中国标准时间),
+     _writeStream: 
+      WriteStream {
+        _writableState: [Object],
+        writable: true,
+        domain: null,
+        _events: {},
+        _eventsCount: 0,
+        _maxListeners: undefined,
+        path: 'C:\\Users\\sks\\AppData\\Local\\Temp\\upload_108266305bf06de03fb81d0ae2c26cec',
+        fd: null,
+        flags: 'w',
+        mode: 438,
+        start: undefined,
+        pos: undefined,
+        bytesWritten: 5731,
+        closed: true } } }
+e:\基金项目\angularTheme\server1.js:17
+            fs.createReadStream(files.headlike.path).pipe(fs.createWriteStream('./upload/'+files.headlike.name));
+
