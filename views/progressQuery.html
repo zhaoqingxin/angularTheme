@@ -1,0 +1,34 @@
+<h3 class="page-title">开户进度查询</h3>
+<div class="query_container clearfix">
+    <form class="form-inline">
+        <div class="form-group col-md-5">
+            <label for="merchantCode">企业商户号</label>
+            <input type="text" class="form-control query_input" id="merchantCode" ng-model="queryObj.merchantCode" placeholder="请输入企业商户号" required>
+        </div>
+        <input type="button" class="btn btn-default col-md-1" ng-click="queryStatus()" value="提交">
+    </form>
+</div>
+<div class="query_container">
+    <table class="table table-bordered">
+        <thead>
+            <tr class="success">
+                <td>投资者名称</td>
+                <td>机构证件类型</td>
+                <td>机构证件号码</td>
+                <td>申请状态</td>
+                <td>成功失败原因</td>
+                <td>签约协议号</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-show="merchantObj.invName">
+                <td data-ng-bind="merchantObj.invName"></td>
+                <td data-ng-bind="merchantObj.idType"></td>
+                <td data-ng-bind="merchantObj.idNo"></td>
+                <td data-ng-bind="merchantObj.appStatus"></td>
+                <td data-ng-bind="merchantObj.reason"></td>
+                <td data-ng-bind="merchantObj.number"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,7 @@
+.jumbotron{
+    padding-left: 48px;
+    border-radius: 6px;
+}
+.jumbotron .text-danger{
+    color: #a94442;
+}

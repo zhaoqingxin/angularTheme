@@ -76,12 +76,6 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope', function($scope
     });
 }]);
 
-/*MetronicApp.controller('formSubController', ['$scope', '$rootScope','validateRegExp', function($scope, $rootScope,validateRegExp) {
-    $scope.$on('$viewContentLoaded', function() {
-        console.log(validateRegExp);
-    });
-}]);*/
-
 /* Setup Layout Part - Header */
 MetronicApp.controller('HeaderController', ['$scope', function($scope) {
     $scope.$on('$includeContentLoaded', function() {
@@ -149,27 +143,47 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load([{
-                        name: 'MetronicApp',
+                        name: 'formSub',
                         insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
                         files: [
+                            'lib/bootstrap-datepicker/css/bootstrap-datepicker3.css',
+                            'lib/bootstrap-datepicker/js/bootstrap-datepicker.js',
                             url['js/page/formSub.js']
                         ]
                     }]);
                 }]
             }
         })
-        .state('chanjet', {
-            url: "/chanjet.html",
-            templateUrl: url['views/chanjet.html'],
-            data: {pageTitle: 'chanjet'},
+        .state('progressQuery', {
+            url: "/progressQuery.html",
+            templateUrl: 'views/progressQuery.html',
+            data: {pageTitle: 'progressQuery'},
+            controller: "progressQueryController",
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load([{
-                        name: 'MetronicApp',
+                        name: 'progressQuery',
                         insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
                         files: [
-                            url['css/page/chanjet.css'],
-                            url['js/page/chanjet.js']
+                            'css/page/progressQuery.css',
+                            'js/page/progressQuery.js'
+                        ]
+                    }]);
+                }]
+            }
+        })
+        .state('error', {
+            url: "/error.html",
+            templateUrl: 'views/error.html',
+            data: {pageTitle: 'error'},
+            controller: "",
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load([{
+                        name: 'error',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
+                        files: [
+                            'css/page/error.css'
                         ]
                     }]);
                 }]

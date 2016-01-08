@@ -1,61 +1,46 @@
-"C:\Program Files (x86)\JetBrains\WebStorm 10.0.1\bin\runnerw.exe" "C:\Program Files\nodejs\node.exe" server1.js
-{ userNumber: 'zhaoqingxin' }
-{ brokerIdFile: 
-   File {
-     domain: null,
-     _events: {},
-     _eventsCount: 0,
-     _maxListeners: undefined,
-     size: 12813,
-     path: 'C:\\Users\\sks\\AppData\\Local\\Temp\\upload_d43854f83ce1edbcb330da2cf263c58b',
-     name: 'CuLogobtn.jpg',
-     type: 'image/jpeg',
-     hash: null,
-     lastModifiedDate: Tue Dec 29 2015 15:26:22 GMT+0800 (中国标准时间),
-     _writeStream: 
-      WriteStream {
-        _writableState: [Object],
-        writable: true,
-        domain: null,
-        _events: {},
-        _eventsCount: 0,
-        _maxListeners: undefined,
-        path: 'C:\\Users\\sks\\AppData\\Local\\Temp\\upload_d43854f83ce1edbcb330da2cf263c58b',
-        fd: null,
-        flags: 'w',
-        mode: 438,
-        start: undefined,
-        pos: undefined,
-        bytesWritten: 12813,
-        closed: true } },
-  handlerFlag: 
-   File {
-     domain: null,
-     _events: {},
-     _eventsCount: 0,
-     _maxListeners: undefined,
-     size: 5731,
-     path: 'C:\\Users\\sks\\AppData\\Local\\Temp\\upload_108266305bf06de03fb81d0ae2c26cec',
-     name: 'Culogo.gif',
-     type: 'image/gif',
-     hash: null,
-     lastModifiedDate: Tue Dec 29 2015 15:26:22 GMT+0800 (中国标准时间),
-     _writeStream: 
-      WriteStream {
-        _writableState: [Object],
-        writable: true,
-        domain: null,
-        _events: {},
-        _eventsCount: 0,
-        _maxListeners: undefined,
-        path: 'C:\\Users\\sks\\AppData\\Local\\Temp\\upload_108266305bf06de03fb81d0ae2c26cec',
-        fd: null,
-        flags: 'w',
-        mode: 438,
-        start: undefined,
-        pos: undefined,
-        bytesWritten: 5731,
-        closed: true } } }
-e:\基金项目\angularTheme\server1.js:17
-            fs.createReadStream(files.headlike.path).pipe(fs.createWriteStream('./upload/'+files.headlike.name));
-
+/** 商户Code */
+    private String merchantCode;
+    /** 投资者名称 */
+    private String invName;
+    /** 机构证件类型 */
+    private String idType;
+    /** 机构证件号码 */
+    private String idNo;
+    /** 机构证件有效期 */
+    private String idExpireDt;
+    /** 银行编码 */
+    private String bankNo;
+    /** 银行全称 */
+    private String bankName;
+    /** 银行账户名 */
+    private String acctNm;
+    /** 银行账号 */
+    private String settlAcct;
+    /** 账户币种 */
+    private String curType;
+    /** 组织机构代码证 */
+    private String orgCode;
+    /** 机构税务登记证 */
+    private String taxRegCode;
+    /** 法定代表人 */
+    private String reprName;
+    /** 法人证件类型 */
+    private String reprIdTp;
+    /** 法人证件号码 */
+    private String reprIdNo;
+    /** 法人证件有效期 */
+    private String reprIdExpireDt;
+    /** 经办人1 */
+    private String broker;
+    /** 经办人1证件类型 */
+    private String bkIdTp;
+    /** 经办人1证件号码 */
+    private String bkIdNo;
+    /** 经办人1证件有效期 */
+    private String bkIdExpireDt;
+    /** 经办人1手机号码 */
+    private String bkMobile;
+    /** 经办人1 EMAIL邮箱 */
+    private String bkEmail;
+    /** 申请状态 */
+    private String appStatus;
